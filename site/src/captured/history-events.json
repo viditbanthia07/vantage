@@ -1,0 +1,278 @@
+{
+  "available": true,
+  "count": 17,
+  "events": [
+    {
+      "entity_id": "person_2",
+      "evidence": {
+        "activity": "loitering",
+        "confidence": 0.5,
+        "duration_s": 20.0,
+        "why": "stationary for 20s"
+      },
+      "id": 17,
+      "identity": null,
+      "rule": "loitering",
+      "severity": "notice",
+      "summary": "person_2 is loitering",
+      "timestamp": 1788219266.5953805,
+      "zone": null
+    },
+    {
+      "entity_id": "person_17",
+      "evidence": {
+        "activity": "loitering",
+        "confidence": 0.5,
+        "duration_s": 20.01,
+        "why": "stationary for 20s"
+      },
+      "id": 16,
+      "identity": null,
+      "rule": "loitering",
+      "severity": "notice",
+      "summary": "person_17 is loitering",
+      "timestamp": 1787275658.161407,
+      "zone": null
+    },
+    {
+      "entity_id": "cat_15",
+      "evidence": {
+        "activity": "loitering",
+        "confidence": 0.502,
+        "duration_s": 20.07,
+        "why": "stationary for 20s"
+      },
+      "id": 15,
+      "identity": null,
+      "rule": "loitering",
+      "severity": "notice",
+      "summary": "cat_15 is loitering",
+      "timestamp": 1787275637.173092,
+      "zone": null
+    },
+    {
+      "entity_id": "chair_9",
+      "evidence": {
+        "activity": "running",
+        "confidence": 0.479,
+        "duration_s": 1.52,
+        "why": "1.43 h/s, held on 86% of the last 0.4s"
+      },
+      "id": 14,
+      "identity": null,
+      "rule": "running",
+      "severity": "notice",
+      "summary": "chair_9 is running",
+      "timestamp": 1787275566.015455,
+      "zone": null
+    },
+    {
+      "entity_id": "person_1",
+      "evidence": {
+        "activity": "loitering",
+        "confidence": 0.501,
+        "duration_s": 20.05,
+        "why": "stationary for 20s"
+      },
+      "id": 13,
+      "identity": null,
+      "rule": "loitering",
+      "severity": "notice",
+      "summary": "person_1 is loitering",
+      "timestamp": 1787275563.9522235,
+      "zone": null
+    },
+    {
+      "entity_id": "person_1",
+      "evidence": {
+        "activity": "loitering",
+        "confidence": 0.501,
+        "duration_s": 20.03,
+        "why": "stationary for 20s"
+      },
+      "id": 12,
+      "identity": null,
+      "rule": "loitering",
+      "severity": "notice",
+      "summary": "person_1 is loitering",
+      "timestamp": 1787275473.895329,
+      "zone": null
+    },
+    {
+      "entity_id": "person_1",
+      "evidence": {
+        "activity": "loitering",
+        "confidence": 1.0,
+        "duration_s": 320.89,
+        "why": "stationary for 321s"
+      },
+      "id": 11,
+      "identity": null,
+      "rule": "loitering",
+      "severity": "notice",
+      "summary": "person_1 is loitering",
+      "timestamp": 1787275419.4968524,
+      "zone": null
+    },
+    {
+      "entity_id": "bottle_30",
+      "evidence": {
+        "activity": "loitering",
+        "confidence": 0.502,
+        "duration_s": 20.06,
+        "why": "stationary for 20s"
+      },
+      "id": 10,
+      "identity": null,
+      "rule": "loitering",
+      "severity": "notice",
+      "summary": "bottle_30 is loitering",
+      "timestamp": 1787275387.27559,
+      "zone": null
+    },
+    {
+      "entity_id": "person_1",
+      "evidence": {
+        "activity": "loitering",
+        "confidence": 1.0,
+        "duration_s": 260.88,
+        "why": "stationary for 261s"
+      },
+      "id": 9,
+      "identity": null,
+      "rule": "loitering",
+      "severity": "notice",
+      "summary": "person_1 is loitering",
+      "timestamp": 1787275359.4823983,
+      "zone": null
+    },
+    {
+      "entity_id": "person_1",
+      "evidence": {
+        "activity": "loitering",
+        "confidence": 1.0,
+        "duration_s": 200.88,
+        "why": "stationary for 201s"
+      },
+      "id": 8,
+      "identity": null,
+      "rule": "loitering",
+      "severity": "notice",
+      "summary": "person_1 is loitering",
+      "timestamp": 1787275299.4807699,
+      "zone": null
+    },
+    {
+      "entity_id": "person_1",
+      "evidence": {
+        "activity": "loitering",
+        "confidence": 1.0,
+        "duration_s": 140.81,
+        "why": "stationary for 141s"
+      },
+      "id": 7,
+      "identity": null,
+      "rule": "loitering",
+      "severity": "notice",
+      "summary": "person_1 is loitering",
+      "timestamp": 1787275239.4183524,
+      "zone": null
+    },
+    {
+      "entity_id": "person_1",
+      "evidence": {
+        "activity": "loitering",
+        "confidence": 1.0,
+        "duration_s": 80.75,
+        "why": "stationary for 81s"
+      },
+      "id": 6,
+      "identity": null,
+      "rule": "loitering",
+      "severity": "notice",
+      "summary": "person_1 is loitering",
+      "timestamp": 1787275179.3554428,
+      "zone": null
+    },
+    {
+      "entity_id": "cup_20",
+      "evidence": {
+        "activity": "running",
+        "confidence": 0.679,
+        "duration_s": 4.53,
+        "why": "2.14 h/s, held on 71% of the last 0.4s"
+      },
+      "id": 5,
+      "identity": null,
+      "rule": "running",
+      "severity": "notice",
+      "summary": "cup_20 is running",
+      "timestamp": 1787275125.0021172,
+      "zone": null
+    },
+    {
+      "entity_id": "person_1",
+      "evidence": {
+        "activity": "loitering",
+        "confidence": 0.518,
+        "duration_s": 20.71,
+        "why": "stationary for 21s"
+      },
+      "id": 4,
+      "identity": null,
+      "rule": "loitering",
+      "severity": "notice",
+      "summary": "person_1 is loitering",
+      "timestamp": 1787275119.3105843,
+      "zone": null
+    },
+    {
+      "entity_id": "person_1",
+      "evidence": {
+        "activity": "loitering",
+        "confidence": 0.5,
+        "duration_s": 20.0,
+        "why": "stationary for 20s"
+      },
+      "id": 3,
+      "identity": null,
+      "rule": "loitering",
+      "severity": "notice",
+      "summary": "person_1 is loitering",
+      "timestamp": 1787275059.2930598,
+      "zone": null
+    },
+    {
+      "entity_id": "person_1",
+      "evidence": {
+        "activity": "loitering",
+        "confidence": 0.501,
+        "duration_s": 20.03,
+        "why": "stationary for 20s"
+      },
+      "id": 2,
+      "identity": null,
+      "rule": "loitering",
+      "severity": "notice",
+      "summary": "person_1 is loitering",
+      "timestamp": 1787274998.2553189,
+      "zone": null
+    },
+    {
+      "entity_id": "person_1",
+      "evidence": {
+        "activity": "loitering",
+        "confidence": 0.502,
+        "duration_s": 20.07,
+        "why": "stationary for 20s"
+      },
+      "id": 1,
+      "identity": null,
+      "rule": "loitering",
+      "severity": "notice",
+      "summary": "person_1 is loitering",
+      "timestamp": 1787274937.4380374,
+      "zone": null
+    }
+  ]
+}

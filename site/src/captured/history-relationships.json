@@ -1,0 +1,33 @@
+{
+  "available": true,
+  "count": 1,
+  "relationships": [
+    {
+      "camera_id": "camera_01",
+      "entity_a": "person_2",
+      "entity_b_or_zone": "tie_3",
+      "evidence": {
+        "duration_s": 0.0,
+        "following_count": 0,
+        "primary_pattern": null,
+        "proximity_count": 0,
+        "score_breakdown": {
+          "active_decayed_score": 0.044,
+          "co_occurrence_contribution": 0.044,
+          "decay_factor": 1.0,
+          "duration_contribution": 0.0,
+          "following_contribution": 0.0,
+          "proximity_contribution": 0.0,
+          "total_raw_score": 0.044
+        },
+        "summary": "co-appeared 2x"
+      },
+      "first_seen": 1788219246.3310773,
+      "id": 1,
+      "last_seen": 1788219246.3310773,
+      "max_confidence_tier": 0.04423984338571903,
+      "occurrence_count": 2,
+      "relation_type": "co_occurrence"
+    }
+  ]
+}

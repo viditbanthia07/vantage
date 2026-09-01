@@ -2544,6 +2544,25 @@ npm run smoke -- --url http://localhost:8080   # load the page in Chrome and
                                                # fail on any console error
 ```
 
+The project page is a third application, in `site/` — one scroll-driven page,
+separate dependencies, separate build, and its own README. Everything it shows
+came out of a run rather than out of a design tool:
+
+```bash
+python tools/capture_media.py --out site/public/media   # the clip and the stills
+python tools/capture_data.py  --out site/src/captured       # real /api/* responses,
+                                                        # the refusals, and this
+                                                        # section, parsed
+cd site && npm install && npm run build && npm run smoke
+```
+
+Its beat 6 is section 8 above, extracted at build time so the page cannot
+confess to a limitation this README has dropped or omit one it has gained. Its
+beat 5 is a list of the API's own "I cannot answer this" sentences, captured by
+asking routes questions nothing can answer. No footage of real people is
+published on it, and `site/README.md` explains why that ruled out the
+better-looking option.
+
 Conventions: type hints throughout, dependencies pointing inward, no silent exception
 handling, no hard-coded paths, and no component that cannot be replaced without touching
 its neighbours. Comments explain *why*, never *what*.

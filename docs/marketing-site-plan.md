@@ -227,3 +227,79 @@ These want answers before step 1, not during.
 3. **Is there a name and a domain**, or does it live at a GitHub Pages URL?
 4. **Does beat 6 stay?** It is the strongest idea here and the one most likely to
    be cut. Deciding now is better than deciding when it feels risky.
+
+---
+
+## 9. What was built, and where it left the plan
+
+*Added after the fact. The seven sections above are the plan as written; this one
+is the record of building it, including the four places the plan turned out to
+be wrong.*
+
+The site is in `site/`, its own README covers running and deploying it, and
+`npm run smoke` enforces the budgets in §6 against a real browser.
+
+### The four open questions in §8, answered
+
+1. **Footage: synthetic, and the reasoning changed the media entirely.** The
+   plan treated the Wikimedia clips as usable "under their licences". They are
+   not usable here: those licences require attributing the author, and this
+   repository never recorded the attribution — the clips are gitignored
+   downloads named only by scene and licence in the README. That is a licence
+   breach rather than a judgement call, and it settles the question before the
+   consent one is reached. So every published frame comes from the built-in
+   synthetic source. It is a much weaker picture — four circles, one detected —
+   and the page says so in beat 2 rather than hiding it.
+2. **Owner:** `viditbanthia07/vantage`, the `origin` remote.
+3. **Domain:** none. Static output with a configurable base path, so a GitHub
+   Pages project site and a domain are both one environment variable.
+4. **Beat 6 stays**, and grew: the README's Known Limitations section holds
+   **thirty-four** entries, not the eleven this plan estimated, and all
+   thirty-four are on the page.
+
+### Four deviations
+
+**Vite + React, not Astro.** The plan chose Astro for islands. But beat 4's whole
+argument — "the real `TrendChart`, imported from the console, no
+reimplementation" — needs to import a React component, and there is exactly one
+page here, so islands buy nothing. React and ReactDOM cost ~45 KB gzipped inside
+a 150 KB budget that currently sits at 68 KB.
+
+**Beat 1 is the twin, not the video scrub.** The plan's hero was a WebGL shader
+scrubbing between raw and analysed footage. Built, and then demoted to beat 2,
+because with synthetic footage the analysed side reveals almost nothing — the
+effect was strongest exactly where the content was weakest. The hero is instead
+the 3D facility twin from a real `/api/twin` payload: a floor plan, three camera
+frusta with their real yaw and field of view, eleven anonymous entities and
+their trails, with the reader's scroll driving the camera from an oblique view
+of a room to a plan view of a dataset. It is a better hero *and* a better
+argument, because the twin is the project's privacy stance made visible.
+
+The scrub survives in beat 2, as one canvas compositing two halves of a single
+decoded frame rather than two `<video>` elements — a video element can only be
+in one place in the DOM, and two players synchronised by `currentTime` drift
+apart within seconds.
+
+**Beat 3 is a ledger, not a drawn SVG path.** The plan wanted a trail drawing
+itself with a dwell counter. The real trails the twin records are 25 points and
+about a metre long, which is not a path worth drawing. What the run actually
+produced is far better: a stream of real events with the evidence each rule
+recorded — "stationary for 20s", "co-appeared 6x, recurrent proximity 5x",
+"36.8s in transit between cameras" — none of which exists in any single frame.
+That is the beat's claim stated by the system rather than illustrated.
+
+**Beat 4 shows an almost empty chart, on purpose.** The plan wanted "weeks of
+buckets, one anomaly capped in red". The real store holds about four hours of
+history: 169 buckets, one with a reading, 0.6% coverage, and an anomaly detector
+that returns `available: false` with "no slot has enough history behind it yet,
+so nothing was compared". Generating a convincing month would have taken ten
+minutes and would have been precisely the lie this project exists not to tell.
+The chart of 168 hatched gaps and one bar is the strongest thing on the page
+after beat 6.
+
+### One thing the plan got exactly right
+
+§2's claim that **the honesty is the pitch**. Every beat that ended up strongest
+— the refusals quoted verbatim, the thirty-four limitations, the empty chart,
+the unflattering synthetic footage — is strong *because* it is the thing a page
+like this normally hides.

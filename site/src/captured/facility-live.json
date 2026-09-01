@@ -1,0 +1,536 @@
+{
+  "age_s": 0.03,
+  "available": true,
+  "captured_at": 1788230312.6601596,
+  "entities": [
+    {
+      "activities": [
+        "walking"
+      ],
+      "camera": "north",
+      "entity_id": "global_bus_37",
+      "identity": "GLOBAL_BUS_37",
+      "label": "bus",
+      "motion": "moving",
+      "posture": null,
+      "speed": 1.23,
+      "zones": [
+        "NORTH"
+      ]
+    },
+    {
+      "activities": [
+        "walking"
+      ],
+      "camera": "west",
+      "entity_id": "global_car_19",
+      "identity": "GLOBAL_CAR_19",
+      "label": "car",
+      "motion": "moving",
+      "posture": null,
+      "speed": 1.05,
+      "zones": [
+        "WEST"
+      ]
+    },
+    {
+      "activities": [
+        "walking"
+      ],
+      "camera": "west",
+      "entity_id": "global_car_44",
+      "identity": "GLOBAL_CAR_44",
+      "label": "car",
+      "motion": "moving",
+      "posture": null,
+      "speed": 3.16,
+      "zones": [
+        "WEST"
+      ]
+    },
+    {
+      "activities": [
+        "walking"
+      ],
+      "camera": "west",
+      "entity_id": "global_car_45",
+      "identity": "GLOBAL_CAR_45",
+      "label": "car",
+      "motion": "moving",
+      "posture": null,
+      "speed": 3.77,
+      "zones": [
+        "WEST"
+      ]
+    },
+    {
+      "activities": [
+        "walking"
+      ],
+      "camera": "west",
+      "entity_id": "global_car_14",
+      "identity": "GLOBAL_CAR_14",
+      "label": "car",
+      "motion": "moving",
+      "posture": null,
+      "speed": 3.75,
+      "zones": [
+        "WEST"
+      ]
+    },
+    {
+      "activities": [
+        "walking"
+      ],
+      "camera": "west",
+      "entity_id": "global_car_19",
+      "identity": "GLOBAL_CAR_19",
+      "label": "car",
+      "motion": "moving",
+      "posture": null,
+      "speed": 1.56,
+      "zones": [
+        "WEST"
+      ]
+    },
+    {
+      "activities": [
+        "walking"
+      ],
+      "camera": "west",
+      "entity_id": "global_truck_49",
+      "identity": "GLOBAL_TRUCK_49",
+      "label": "truck",
+      "motion": "moving",
+      "posture": null,
+      "speed": 0.59,
+      "zones": [
+        "WEST"
+      ]
+    },
+    {
+      "activities": [
+        "walking"
+      ],
+      "camera": "yard",
+      "entity_id": "global_person_40",
+      "identity": "GLOBAL_PERSON_40",
+      "label": "person",
+      "motion": "moving",
+      "posture": null,
+      "speed": 0.64,
+      "zones": [
+        "YARD"
+      ]
+    },
+    {
+      "activities": [
+        "walking"
+      ],
+      "camera": "yard",
+      "entity_id": "global_motorcycle_47",
+      "identity": "GLOBAL_MOTORCYCLE_47",
+      "label": "motorcycle",
+      "motion": "moving",
+      "posture": null,
+      "speed": 0.67,
+      "zones": [
+        "YARD"
+      ]
+    },
+    {
+      "activities": [
+        "walking"
+      ],
+      "camera": "yard",
+      "entity_id": "global_car_50",
+      "identity": "GLOBAL_CAR_50",
+      "label": "car",
+      "motion": "moving",
+      "posture": null,
+      "speed": 0.3,
+      "zones": [
+        "YARD"
+      ]
+    },
+    {
+      "activities": [
+        "idle"
+      ],
+      "camera": "yard",
+      "entity_id": "global_motorcycle_47",
+      "identity": "GLOBAL_MOTORCYCLE_47",
+      "label": "motorcycle",
+      "motion": "stationary",
+      "posture": null,
+      "speed": 0.15,
+      "zones": [
+        "YARD"
+      ]
+    },
+    {
+      "activities": [
+        "walking"
+      ],
+      "camera": "yard",
+      "entity_id": "global_bicycle_51",
+      "identity": "GLOBAL_BICYCLE_51",
+      "label": "bicycle",
+      "motion": "moving",
+      "posture": null,
+      "speed": 0.56,
+      "zones": [
+        "YARD"
+      ]
+    }
+  ],
+  "events": [
+    {
+      "camera_id": "yard",
+      "elapsed_s": 68.81,
+      "entity_id": "motorcycle_33",
+      "evidence": {
+        "active_strength": 0.356,
+        "entity_a": "motorcycle_33",
+        "entity_b": "motorcycle_36",
+        "proximity_count": 5,
+        "summary": "co-appeared 6x, recurrent proximity 5x, 0.5s joint duration"
+      },
+      "frame_index": 1101,
+      "id": "ev_1788230311829_19",
+      "related_id": null,
+      "rule": "recurring_proximity",
+      "severity": "info",
+      "summary": "Recurring proximity (5x) between motorcycle_33 and motorcycle_36",
+      "timestamp": 1788230311.829299,
+      "zone": "YARD"
+    },
+    {
+      "camera_id": "yard",
+      "elapsed_s": 64.22,
+      "entity_id": "",
+      "evidence": {
+        "clip_url": "/api/evidence/ev_1788230308975_18.mp4",
+        "entity_count": 3,
+        "spread_rate": 0.13
+      },
+      "frame_index": 1066,
+      "id": "ev_1788230308975_18",
+      "related_id": null,
+      "rule": "group_dispersion",
+      "severity": "notice",
+      "summary": "Sudden group dispersion (3 entities) in yard",
+      "timestamp": 1788230308.9753451,
+      "zone": "YARD"
+    },
+    {
+      "camera_id": "west",
+      "elapsed_s": 61.05,
+      "entity_id": "car_28",
+      "evidence": {
+        "active_strength": 0.357,
+        "entity_a": "car_28",
+        "entity_b": "car_32",
+        "proximity_count": 5,
+        "summary": "co-appeared 6x, recurrent proximity 5x, 0.6s joint duration"
+      },
+      "frame_index": 1050,
+      "id": "ev_1788230308703_17",
+      "related_id": null,
+      "rule": "recurring_proximity",
+      "severity": "info",
+      "summary": "Recurring proximity (5x) between car_28 and car_32",
+      "timestamp": 1788230308.7033417,
+      "zone": "WEST"
+    },
+    {
+      "camera_id": "north",
+      "elapsed_s": 53.73,
+      "entity_id": "bus_26",
+      "evidence": {
+        "active_strength": 0.356,
+        "entity_a": "bus_26",
+        "entity_b": "truck_27",
+        "proximity_count": 5,
+        "summary": "co-appeared 6x, recurrent proximity 5x, 0.5s joint duration"
+      },
+      "frame_index": 994,
+      "id": "ev_1788230305111_16",
+      "related_id": null,
+      "rule": "recurring_proximity",
+      "severity": "info",
+      "summary": "Recurring proximity (5x) between bus_26 and truck_27",
+      "timestamp": 1788230305.11155,
+      "zone": "NORTH"
+    },
+    {
+      "camera_id": "west",
+      "elapsed_s": 36.48,
+      "entity_id": "person_26",
+      "evidence": {
+        "active_strength": 0.357,
+        "entity_a": "person_26",
+        "entity_b": "person_27",
+        "proximity_count": 5,
+        "summary": "co-appeared 6x, recurrent proximity 5x, 0.6s joint duration"
+      },
+      "frame_index": 715,
+      "id": "ev_1788230290396_15",
+      "related_id": null,
+      "rule": "recurring_proximity",
+      "severity": "info",
+      "summary": "Recurring proximity (5x) between person_26 and person_27",
+      "timestamp": 1788230290.396912,
+      "zone": "WEST"
+    },
+    {
+      "camera_id": "west",
+      "elapsed_s": 29.83,
+      "entity_id": "bicycle_21",
+      "evidence": {
+        "active_strength": 0.356,
+        "entity_a": "bicycle_21",
+        "entity_b": "person_22",
+        "proximity_count": 5,
+        "summary": "co-appeared 6x, recurrent proximity 5x, 0.5s joint duration"
+      },
+      "frame_index": 522,
+      "id": "ev_1788230280353_14",
+      "related_id": null,
+      "rule": "recurring_proximity",
+      "severity": "info",
+      "summary": "Recurring proximity (5x) between bicycle_21 and person_22",
+      "timestamp": 1788230280.353541,
+      "zone": "WEST"
+    },
+    {
+      "camera_id": "north",
+      "elapsed_s": 29.39,
+      "entity_id": "car_17",
+      "evidence": {
+        "active_strength": 0.356,
+        "entity_a": "car_17",
+        "entity_b": "car_18",
+        "proximity_count": 5,
+        "summary": "co-appeared 6x, recurrent proximity 5x, 0.5s joint duration"
+      },
+      "frame_index": 526,
+      "id": "ev_1788230280087_13",
+      "related_id": null,
+      "rule": "recurring_proximity",
+      "severity": "info",
+      "summary": "Recurring proximity (5x) between car_17 and car_18",
+      "timestamp": 1788230280.0878437,
+      "zone": "NORTH"
+    },
+    {
+      "camera_id": "north",
+      "elapsed_s": 29.82,
+      "entity_id": "person_15",
+      "evidence": {
+        "active_strength": 0.358,
+        "entity_a": "person_15",
+        "entity_b": "person_7",
+        "proximity_count": 5,
+        "summary": "co-appeared 6x, recurrent proximity 5x, 1.1s joint duration"
+      },
+      "frame_index": 510,
+      "id": "ev_1788230279171_12",
+      "related_id": null,
+      "rule": "recurring_proximity",
+      "severity": "info",
+      "summary": "Recurring proximity (5x) between person_15 and person_7",
+      "timestamp": 1788230279.1715765,
+      "zone": "NORTH"
+    },
+    {
+      "camera_id": "west",
+      "elapsed_s": 23.21,
+      "entity_id": "bicycle_19",
+      "evidence": {
+        "active_strength": 0.356,
+        "entity_a": "bicycle_19",
+        "entity_b": "person_20",
+        "proximity_count": 5,
+        "summary": "co-appeared 6x, recurrent proximity 5x, 0.5s joint duration"
+      },
+      "frame_index": 434,
+      "id": "ev_1788230275345_11",
+      "related_id": null,
+      "rule": "recurring_proximity",
+      "severity": "info",
+      "summary": "Recurring proximity (5x) between bicycle_19 and person_20",
+      "timestamp": 1788230275.3452303,
+      "zone": "WEST"
+    },
+    {
+      "camera_id": "yard",
+      "elapsed_s": 20.96,
+      "entity_id": "person_11",
+      "evidence": {
+        "active_strength": 0.356,
+        "entity_a": "person_11",
+        "entity_b": "person_13",
+        "proximity_count": 5,
+        "summary": "co-appeared 6x, recurrent proximity 5x, 0.5s joint duration"
+      },
+      "frame_index": 415,
+      "id": "ev_1788230273700_10",
+      "related_id": null,
+      "rule": "recurring_proximity",
+      "severity": "info",
+      "summary": "Recurring proximity (5x) between person_11 and person_13",
+      "timestamp": 1788230273.7002673,
+      "zone": "YARD"
+    },
+    {
+      "camera_id": "north",
+      "elapsed_s": 19.49,
+      "entity_id": "person_10",
+      "evidence": {
+        "active_strength": 0.357,
+        "entity_a": "person_10",
+        "entity_b": "person_7",
+        "proximity_count": 5,
+        "summary": "co-appeared 6x, recurrent proximity 5x, 0.6s joint duration"
+      },
+      "frame_index": 386,
+      "id": "ev_1788230272105_9",
+      "related_id": null,
+      "rule": "recurring_proximity",
+      "severity": "info",
+      "summary": "Recurring proximity (5x) between person_10 and person_7",
+      "timestamp": 1788230272.10575,
+      "zone": "NORTH"
+    },
+    {
+      "camera_id": "north",
+      "elapsed_s": 19.49,
+      "entity_id": "",
+      "evidence": {
+        "clip_url": "/api/evidence/ev_1788230272105_8.mp4",
+        "entity_count": 3,
+        "spread_rate": -0.057
+      },
+      "frame_index": 386,
+      "id": "ev_1788230272105_8",
+      "related_id": null,
+      "rule": "group_convergence",
+      "severity": "notice",
+      "summary": "Rapid group convergence (3 entities) in north",
+      "timestamp": 1788230272.10575,
+      "zone": "NORTH"
+    },
+    {
+      "camera_id": "yard",
+      "elapsed_s": 18.59,
+      "entity_id": "person_7",
+      "evidence": {
+        "active_strength": 0.356,
+        "entity_a": "person_7",
+        "entity_b": "person_8",
+        "proximity_count": 5,
+        "summary": "co-appeared 6x, recurrent proximity 5x, 0.5s joint duration"
+      },
+      "frame_index": 368,
+      "id": "ev_1788230271321_7",
+      "related_id": null,
+      "rule": "recurring_proximity",
+      "severity": "info",
+      "summary": "Recurring proximity (5x) between person_7 and person_8",
+      "timestamp": 1788230271.3211944,
+      "zone": "YARD"
+    },
+    {
+      "camera_id": "west",
+      "elapsed_s": 17.78,
+      "entity_id": "car_13",
+      "evidence": {
+        "active_strength": 0.357,
+        "entity_a": "car_13",
+        "entity_b": "car_15",
+        "proximity_count": 5,
+        "summary": "co-appeared 6x, recurrent proximity 5x, 0.5s joint duration"
+      },
+      "frame_index": 352,
+      "id": "ev_1788230271069_6",
+      "related_id": null,
+      "rule": "recurring_proximity",
+      "severity": "info",
+      "summary": "Recurring proximity (5x) between car_13 and car_15",
+      "timestamp": 1788230271.0694447,
+      "zone": "WEST"
+    },
+    {
+      "camera_id": "north",
+      "elapsed_s": 14.49,
+      "entity_id": "person_5",
+      "evidence": {
+        "active_strength": 0.356,
+        "entity_a": "person_5",
+        "entity_b": "person_7",
+        "proximity_count": 5,
+        "summary": "co-appeared 6x, recurrent proximity 5x, 0.5s joint duration"
+      },
+      "frame_index": 287,
+      "id": "ev_1788230267107_5",
+      "related_id": null,
+      "rule": "recurring_proximity",
+      "severity": "info",
+      "summary": "Recurring proximity (5x) between person_5 and person_7",
+      "timestamp": 1788230267.1071134,
+      "zone": "NORTH"
+    }
+  ],
+  "frame_index": 1173,
+  "has_frame": true,
+  "health": {
+    "detection": {
+      "calls": 1681,
+      "disabled": false,
+      "error_types": {},
+      "failure_rate": 0.0,
+      "failures": 0,
+      "last_error": "",
+      "name": "detection",
+      "worst_streak": 0
+    },
+    "ingest:north": {
+      "calls": 1126,
+      "disabled": false,
+      "error_types": {},
+      "failure_rate": 0.0,
+      "failures": 0,
+      "last_error": "",
+      "name": "ingest:north",
+      "worst_streak": 0
+    },
+    "ingest:west": {
+      "calls": 1117,
+      "disabled": false,
+      "error_types": {},
+      "failure_rate": 0.0,
+      "failures": 0,
+      "last_error": "",
+      "name": "ingest:west",
+      "worst_streak": 0
+    },
+    "ingest:yard": {
+      "calls": 1116,
+      "disabled": false,
+      "error_types": {},
+      "failure_rate": 0.0,
+      "failures": 0,
+      "last_error": "",
+      "name": "ingest:yard",
+      "worst_streak": 0
+    }
+  },
+  "stats": {
+    "active_cameras": 3,
+    "fps": 18.7,
+    "source": "3-camera facility",
+    "total_entities": 12
+  },
+  "viewers": 0
+}

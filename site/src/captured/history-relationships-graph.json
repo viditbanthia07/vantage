@@ -1,0 +1,27 @@
+{
+  "available": true,
+  "graph": {
+    "edges": [
+      {
+        "active_strength": 0.04423984338571903,
+        "co_occurrence_count": 2,
+        "pattern": "co_occurrence",
+        "source": "person_2",
+        "target": "tie_3"
+      }
+    ],
+    "nodes": [
+      {
+        "degree": 1,
+        "id": "person_2"
+      },
+      {
+        "degree": 1,
+        "id": "tie_3"
+      }
+    ],
+    "timestamp": 1788230313.23,
+    "total_edges": 1,
+    "total_nodes": 2
+  }
+}

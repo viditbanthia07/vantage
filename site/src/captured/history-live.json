@@ -1,0 +1,4 @@
+{
+  "available": false,
+  "reason": "no pipeline attached; this dashboard is reading history only"
+}

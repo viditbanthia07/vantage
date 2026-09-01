@@ -1,0 +1,9 @@
+{
+  "available": false,
+  "cameras": [],
+  "entities": [],
+  "facility": {},
+  "reason": "no spatial twin attached; this needs a calibrated facility model",
+  "trails": {},
+  "zones": []
+}

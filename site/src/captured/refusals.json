@@ -1,0 +1,34 @@
+{
+  "refusals": [
+    {
+      "condition": "no store attached",
+      "reason": "no store: this run was started without --store, so nothing is being recorded to query",
+      "route": "/api/analytics"
+    },
+    {
+      "condition": "no store attached",
+      "reason": "no pipeline attached; this dashboard is reading history only",
+      "route": "/api/live"
+    },
+    {
+      "condition": "no store attached",
+      "reason": "No multi-camera scene graph active",
+      "route": "/api/scene"
+    },
+    {
+      "condition": "no store attached",
+      "reason": "no store attached; there is no history to search",
+      "route": "/api/search"
+    },
+    {
+      "condition": "no store attached",
+      "reason": "no spatial twin attached; this needs a calibrated facility model",
+      "route": "/api/twin"
+    },
+    {
+      "condition": "a store with nothing in it yet",
+      "reason": "no slot has enough history behind it yet, so nothing was compared",
+      "route": "/api/analytics"
+    }
+  ]
+}

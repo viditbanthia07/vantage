@@ -1,0 +1,141 @@
+{
+  "entries": [
+    {
+      "lead": "A walk toward the camera reads as a run.",
+      "markdown": "**A walk toward the camera reads as a run.** Speed is measured in entity heights per second, which is what makes it survive a change of resolution and a change of distance. It does not survive a change of *depth*: someone approaching the camera has a box that grows while their feet cross the frame, and the ratio spikes. On five real street clips this is the whole of the remaining false-positive population - 57 \"running\" notices, all on genuine people, most of them walking. Fixing it properly needs a ground plane or an optical-flow estimate of camera relative motion, not a higher `activity.running_speed`; raising the threshold only trades these for missed runs."
+    },
+    {
+      "lead": "Tracks fragment every few seconds on real footage.",
+      "markdown": "**Tracks fragment every few seconds on real footage.** Measured across the same clips, a person track lives a median of 1.9-5.0 seconds. That is not fatal on its own - the boxes are on real people throughout - but everything keyed on a stable identity inherits it. Incident correlation is the clearest case: it attaches events correctly whenever the id holds, and each fragment starts a new incident when it does not, so a scene produces roughly one incident per event."
+    },
+    {
+      "lead": "Zone rules ignore predicted boxes; the spatial relations beside them do not.",
+      "markdown": "**Zone rules ignore predicted boxes; the spatial relations beside them do not.** `EntitySpatial.observed` gates zone entry, exit and dwell, so a coasting box drifting over a boundary raises nothing. The proximity and approach relations in the same result are still computed from every tracked entity, coasting included. That is a smaller version of the bug that produced `potted plant_2 is running` and it has not been measured on real footage yet."
+    },
+    {
+      "lead": "Cross-camera identity is appearance-only.",
+      "markdown": "**Cross-camera identity is appearance-only.** `vantage facility` re-identifies a person across cameras from an HSV appearance descriptor and a spatial-temporal transition prior. Two people in similar clothing under similar lighting will be confused, and a change of jacket breaks the association. It is not face recognition and does not become face recognition."
+    },
+    {
+      "lead": "The facility geometry is configured, not surveyed.",
+      "markdown": "**The facility geometry is configured, not surveyed.** The twin lays out one sector per camera and maps each camera's ground plane onto its sector affinely. There is no homography and no lens calibration, so the metres it reports are the metres of that declared layout. It will put two people in different rooms in different places; it will not tell you how far apart they are. With no cameras attached it is empty rather than furnished, and the dashboard says so."
+    },
+    {
+      "lead": "Relationship scores mean co-appearance, not intent.",
+      "markdown": "**Relationship scores mean co-appearance, not intent.** The vocabulary is deliberately observational \u2014 `co_occurrence`, `recurrent_proximity`, `lagged_trajectory_alignment` \u2014 and no part of it labels a relationship as friendship, collusion or pursuit. A high score says two anonymous ids keep being in frame together, which is a fact about the footage rather than about the people."
+    },
+    {
+      "lead": "Analytics needs about four weeks of history before it can say anything.",
+      "markdown": "**Analytics needs about four weeks of history before it can say anything.** Below three observed samples, a slot is not judged at all, and the run reports how many buckets it declined rather than presenting an unexamined window as a clean one. It detects deviations of roughly +60% and larger; smaller ones are not recoverable from four weeks of data, and the tool says so instead of guessing."
+    },
+    {
+      "lead": "Analytics cannot resolve gaps in databases older than the heartbeat table.",
+      "markdown": "**Analytics cannot resolve gaps in databases older than the heartbeat table.** Stores recorded before schema version 2 fall back to inferring coverage from neighbouring buckets, which works for gaps of an hour or two and cannot resolve a long overnight quiet period. Those hours stay unjudged, which is the honest answer rather than a wrong one."
+    },
+    {
+      "lead": "Identity discrimination is unverified.",
+      "markdown": "**Identity discrimination is unverified.** Face recognition here has been tested for robustness - one face against itself, mirrored, dimmed and half-resolution - but never for *discrimination*, because that needs labelled faces of at least two consenting people, which this project does not collect and no CI runner should hold. The 0.363 match threshold is the figure OpenCV Zoo publishes for these weights, inherited rather than measured on your camera. **Enrol your own people and check the result before trusting a name it reports.** Both the threshold and the runner-up margin are exposed in configuration for exactly that reason."
+    },
+    {
+      "lead": "Identity needs a face, roughly frontal, and reasonably close.",
+      "markdown": "**Identity needs a face, roughly frontal, and reasonably close.** It crops the top 45% of a person box and looks for a face there. Someone facing away, in profile, or far enough that their face is under 40 pixels is reported as `unknown` after 25 attempts and then left alone. That is the correct answer, but it means identity is sparse in wide-angle footage rather than continuous."
+    },
+    {
+      "lead": "Posture needs legs, and a desk webcam has none.",
+      "markdown": "**Posture needs legs, and a desk webcam has none.** A seated person and a standing one are identical from the hips up, so on a typical head-and-shoulders webcam framing the classifier reports `unknown` and says why. That is correct, not broken - but it does mean posture is close to useless for desk-mounted cameras, and useful mainly for a camera that sees whole bodies."
+    },
+    {
+      "lead": "Posture reads the image, not the world.",
+      "markdown": "**Posture reads the image, not the world.** No horizon estimate and no calibration, so a steeply angled camera compresses vertical drops and will eventually read standing as crouching. A tilted installation needs the thresholds reviewed. The failure is quiet: the numbers stay confident."
+    },
+    {
+      "lead": "Pose cost is linear in people, and its in-pipeline cost is not fully understood.",
+      "markdown": "**Pose cost is linear in people, and its in-pipeline cost is not fully understood.** It runs at 4.9 ms per person in a tight loop but 5-13 ms inside the live pipeline, varying by 3.6 ms between two runs of the same configuration. Contention for the single iGPU is the obvious explanation and the measurements only partly support it (see section 7). Budget the range, not the benchmark. `pose.max_persons` and `pose.interval` bound the total; there is no adaptive control that lowers them automatically as a room fills."
+    },
+    {
+      "lead": "Motion state cannot see motion toward the camera.",
+      "markdown": "**Motion state cannot see motion toward the camera.** Speed is box displacement over box height, so someone walking directly at the lens grows rather than translates and reads as slower than they are. Correcting it needs ground-plane geometry, which needs calibration."
+    },
+    {
+      "lead": "Transitions are reported late",
+      "markdown": "**Transitions are reported late** by up to `state.min_state_s` (0.5 s by default) plus filter lag - measured at 0.63 s end to end. That is the price of dwell timings that mean something, and it is a poor trade for anything needing sub-second reaction."
+    },
+    {
+      "lead": "`falling` is not a certified fall detector",
+      "markdown": "**`falling` is not a certified fall detector** and must not be relied on where one is required. It reports that a body went from upright to horizontal quickly, which is a different claim. It **needs legs** - posture needs hips and knees, so a camera seeing people only from the waist up can never report a fall at all - and it inherits the posture rules' blind spot for steeply angled cameras. A person lowering themselves deliberately is reported as **nothing**, not as a low-confidence fall, because a hedged alert teaches whoever reads it to ignore the real one. Detection latency is 0.43 s on scripted ground truth."
+    },
+    {
+      "lead": "Spatial claims rest on a common ground plane, and a camera has no depth.",
+      "markdown": "**Spatial claims rest on a common ground plane, and a camera has no depth.** Two people on opposite sides of a room can have boxes that overlap perfectly. Proximity is a good approximation for entities at similar depth and degrades as their depths diverge. Distances are entity heights, not metres, and thresholds should be tuned per camera rather than trusted as physical distances. An object that is held or wall-mounted breaks the anchor entirely: its \"ground point\" is not on the ground, so every distance to it is wrong by however far off the floor it is."
+    },
+    {
+      "lead": "Interaction is the weakest claim in the platform",
+      "markdown": "**Interaction is the weakest claim in the platform**, which is why it carries two confidence levels rather than one. At 0.4 it means \"a stationary person was close to this for a while in a flat image\" - not that they touched it. Only the 0.85 reach-confirmed tier rests on direct evidence."
+    },
+    {
+      "lead": "Activity thresholds are chosen, not tuned.",
+      "markdown": "**Activity thresholds are chosen, not tuned.** Unlike the tracker's parameters, which are the output of a search against held-out data, the activity thresholds were set from published gait figures and checked against the scenarios. The scenarios confirm the rules behave as specified; they cannot confirm that `loiter_s: 20` is the right number for your building."
+    },
+    {
+      "lead": "Open-vocabulary detection cannot run live on this hardware, and the split is deliberate.",
+      "markdown": "**Open-vocabulary detection cannot run live on this hardware, and the split is deliberate.** Measured, not estimated:"
+    },
+    {
+      "lead": "Tracking is motion-only, and long total occlusions break identity.",
+      "markdown": "**Tracking is motion-only, and long total occlusions break identity.** With no appearance model there is nothing to re-identify an object by, so recovery depends entirely on the predicted box still overlapping the object when it reappears. Measured: identity survives **1.5 s** of total disappearance and then a new entity is issued. Partial occlusion is unaffected and survives indefinitely, which is the case that actually dominates in practice. Raising `tracking.max_lost_s` extends the window but also raises the chance of reviving a track onto the wrong object, and the extrapolated position degrades anyway \u2014 one measured failure came from a detector box shrinking as an object entered an occluder, which inflated the velocity estimate before the object vanished. Fixing that class of failure properly needs appearance features, which this phase deliberately does not have."
+    },
+    {
+      "lead": "Velocity damping while coasting was tried and rejected.",
+      "markdown": "**Velocity damping while coasting was tried and rejected.** The hypothesis was that a prediction should decay toward stationary as evidence ages. It measured neutral-to-negative on the benchmark and did not recover the real-footage case it was written for, so it was removed rather than shipped as a knob that does nothing. The actual cause of that failure turned out to be size extrapolation, described next."
+    },
+    {
+      "lead": "OpenVINO compiled-model caching is deliberately disabled.",
+      "markdown": "**OpenVINO compiled-model caching is deliberately disabled.** Enabling `CACHE_DIR` looks like free startup time and costs a crash: on this Iris Xe / OpenVINO 2026.3 combination, *loading* a cached GPU blob segfaults the process during interpreter shutdown \u2014 after inference has completed and returned correct results, so it presents as a mysterious exit code 139 rather than an obvious failure. Bisected to `CACHE_DIR` specifically; writing the cache is clean, reading it back is not. The optimisation was worth ~0.9 s of one-off startup (1058 ms \u2192 182 ms), which is not a trade worth a crash. **Do not re-enable it without re-testing that exact path** \u2014 the comment in `openvino_backend.py` says so too."
+    },
+    {
+      "lead": "Detection runs on the consumer thread.",
+      "markdown": "**Detection runs on the consumer thread.** Inference is synchronous inside the frame loop, so a slow model directly reduces delivered FPS on live sources (the queue then drops frames to keep latency bounded, exactly as designed). `detection.interval` and the adaptive governor are the levers. `AsyncInferenceStage` exists and is tested \u2014 it moves detection behind its own bounded queue \u2014 but **no pipeline uses it yet**: it is a component, not a mode you can switch on, and wiring it would need the governor's cost model reworked around a detector that no longer runs on the loop it is pacing."
+    },
+    {
+      "lead": "GPU results differ slightly from CPU.",
+      "markdown": "**GPU results differ slightly from CPU.** Intel GPUs execute fp16 by default. Marginal low-confidence detections can appear on one and not the other. Reported in the `PREC` column rather than papered over."
+    },
+    {
+      "lead": "Three detector families are implemented",
+      "markdown": "**Three detector families are implemented**, and each is a deliberate choice rather than a menu: YOLOX for the live pipeline, D-FINE / obj365 for 365-class detection, and Grounding DINO behind `vantage discover` for open-vocabulary queries \u2014 the last as a separate command because it costs seconds per prompt against the live detector's milliseconds. RT-DETR has a seam and no adapter; that is future work, not something already half-built."
+    },
+    {
+      "lead": "`yolox-s` is catalogued but not realtime here.",
+      "markdown": "**`yolox-s` is catalogued but not realtime here.** 640x640 input on this hardware is an accuracy option for offline analysis, not for live camera work."
+    },
+    {
+      "lead": "One source per pipeline.",
+      "markdown": "**One source per pipeline.** `IngestionPipeline` handles a single source. Multi-camera support needs a manager that owns several pipelines and merges their telemetry; `Frame` already carries `source_id` so nothing has to change to allow it."
+    },
+    {
+      "lead": "RTSP is implemented but untested here.",
+      "markdown": "**RTSP is implemented but untested here.** The code path exists and is the standard FFmpeg one, but there was no stream available on this machine to verify against. Treat it as unproven until you run it. PyAV would give better timestamp fidelity for network streams and is the natural second `FrameSource` implementation."
+    },
+    {
+      "lead": "Camera shutdown can lag by up to 5 seconds.",
+      "markdown": "**Camera shutdown can lag by up to 5 seconds.** If a driver blocks inside `read()`, `close()` waits up to 5 s before giving up on the capture thread. The thread is a daemon so the process still exits; the device handle is released either way."
+    },
+    {
+      "lead": "Blank frames are a warning, not an error.",
+      "markdown": "**Blank frames are a warning, not an error.** A closed privacy shutter is indistinguishable from a healthy camera by every property OpenCV reports \u2014 correct resolution, correct frame rate, successful reads, near-black pixels. Vantage logs a warning when the probe frame carries no picture, because a legitimately dark scene looks identical and refusing to start would be worse. *This was hit for real during Phase 1 validation on this machine, and the check was found to be wrong during Phase 3 validation:* it tested for **exactly** zero pixels, but a real sensor behind a closed shutter returns two or three counts of thermal noise. A shuttered camera streamed 200 frames at a maximum pixel value of 3, the detector correctly found nothing, and no warning explained why. The threshold is now `BLANK_LEVEL = 8`."
+    },
+    {
+      "lead": "Driver negotiation is advisory.",
+      "markdown": "**Driver negotiation is advisory.** Requested width/height/FPS/FOURCC are requests. What was actually granted is reported in `SourceInfo` and a mismatch is logged. Always trust `SourceInfo` over what you asked for."
+    },
+    {
+      "lead": "OpenCV 5.0.0 is very new.",
+      "markdown": "**OpenCV 5.0.0 is very new.** It works well here, but parts of the CV ecosystem still pin `opencv-python<5`. If a Phase 2 dependency conflicts, pin to the 4.12 line \u2014 the code uses no APIs that differ between them."
+    },
+    {
+      "lead": "`configs/default.yaml` is found relative to the source checkout.",
+      "markdown": "**`configs/default.yaml` is found relative to the source checkout.** Installed as a wheel outside a checkout, the bundled default is not located and built-in defaults apply. Pass `--config` or set `$VANTAGE_CONFIG` in that situation."
+    }
+  ],
+  "source": "README.md 8. Known limitations"
+}

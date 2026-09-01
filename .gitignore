@@ -43,3 +43,14 @@ build/
 # from disk and the packaged exe bundles it - but its inputs are not.
 frontend/node_modules/
 frontend/dist/
+
+# Marketing site (site/). Its dependencies and build output are not committed;
+# its captured media and captured API payloads are, because they are the page's
+# content and regenerating them needs the sample clips and a real run.
+site/node_modules/
+site/dist/
+
+# ...and the H.264 fallback for the hero clip, which the blanket *.mp4 rule
+# above would otherwise drop, leaving Safari before 14.1 with a poster frame
+# and no video.
+!site/public/media/*.mp4

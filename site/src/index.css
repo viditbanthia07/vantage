@@ -1,0 +1,209 @@
+/*
+ * The page's own layer, on top of the console's tokens.
+ *
+ * Fonts are bundled rather than fetched, for the same reason the console bundles
+ * them and one more: a page whose argument is that it runs no third-party
+ * trackers cannot open a connection to fonts.gstatic.com on load. There are no
+ * external requests from this page at all, and `scripts/smoke.mjs` fails the
+ * build if one appears.
+ */
+@import '@fontsource/inter/latin-400.css';
+@import '@fontsource/inter/latin-500.css';
+@import '@fontsource/inter/latin-600.css';
+@import '@fontsource/source-serif-4/latin-400.css';
+@import '@fontsource/source-serif-4/latin-600.css';
+@import '@fontsource/ibm-plex-mono/latin-400.css';
+@import '@fontsource/ibm-plex-mono/latin-600.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    /* The scroll driver reads this so a beat can pin against a real height
+       rather than a guessed one. */
+    --beat-height: 100svh;
+  }
+
+  html {
+    /* Lenis owns the scroll; native smooth on top of it fights it. Where Lenis
+       is off - reduced motion, or no JS - the browser's own scrolling is what
+       runs, and `scroll-behavior: auto` is correct for that too. */
+    scroll-behavior: auto;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    background-color: #14110d;
+    color: #e8e2d4;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    /* The board's grain, at a quarter of the console's strength: this page is
+       looked at once, not for eight hours, and can carry a little more. */
+    background-image:
+      radial-gradient(ellipse at 15% 0%, rgba(176, 141, 87, 0.07) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 100%, rgba(179, 58, 46, 0.05) 0%, transparent 55%);
+    background-attachment: fixed;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  ::selection {
+    background: rgba(179, 58, 46, 0.35);
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(176, 141, 87, 0.3);
+    border-radius: 3px;
+  }
+
+  :focus-visible {
+    outline: 2px solid #b08d57;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 600;
+    text-wrap: balance;
+  }
+
+  /* Long-form paragraphs only. Tailwind's reset already zeroes margins. */
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  /*
+   * A beat: one claim, one screenful.
+   *
+   * `min-height` rather than `height`, and `svh` rather than `vh`, because a
+   * mobile browser's toolbar makes `100vh` taller than the visible viewport and
+   * pins a section's last line under the chrome. Content longer than the
+   * viewport - beat 6 is deliberately much longer - simply grows.
+   */
+  .beat {
+    @apply relative flex min-h-[100svh] w-full flex-col justify-center px-6 py-24 sm:px-10 lg:px-16;
+  }
+
+  .beat-inner {
+    @apply mx-auto w-full max-w-beat;
+  }
+
+  /* The small stamped label above every beat's headline. */
+  .eyebrow {
+    @apply font-mono text-micro uppercase tracking-[0.18em] text-brass;
+  }
+
+  .beat-title {
+    @apply mt-5 max-w-4xl font-serif text-beat text-warm-white;
+  }
+
+  .beat-lede {
+    @apply mt-6 max-w-prose text-lead text-warm-white/70;
+  }
+
+  .rule {
+    @apply h-px w-full bg-brass/20;
+  }
+
+  /* A quoted machine response: monospace, on paper-dark, with a red edge. */
+  .quote-card {
+    @apply border-l-2 border-string-red/60 bg-board-surface/70 px-5 py-4 font-mono text-body text-warm-white/85;
+  }
+
+  .skip-link {
+    @apply absolute left-4 top-4 z-50 -translate-y-24 rounded bg-manila px-4 py-2 font-mono text-tiny text-ink transition-transform;
+  }
+  .skip-link:focus {
+    @apply translate-y-0;
+  }
+}
+
+/*
+ * Reduced motion removes the animation rather than shortening it.
+ *
+ * Three things have to happen together, and missing any one leaves the page
+ * broken instead of still: the CSS transitions go, the scroll-driven reveals
+ * are set to their finished state by `.is-revealed` (the scroll driver applies
+ * it immediately in this mode rather than on intersection), and Lenis is never
+ * constructed at all, so the browser's native scrolling is what runs.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/*
+ * The reveal primitive.
+ *
+ * Everything that arrives on scroll uses these two classes and nothing else, so
+ * "what moves on this page" is one answer rather than thirty. 14px and 400ms:
+ * far enough to read as arriving, short enough that a fast scroll never
+ * outruns it.
+ */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+  transition:
+    opacity 400ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* A headline revealed a word at a time. The spans are created by `splitWords`;
+   without JS the headline is plain text and visible. */
+.word {
+  display: inline-block;
+  opacity: 0;
+  transform: translate3d(0, 0.4em, 0);
+  transition:
+    opacity 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--word-delay, 0ms);
+}
+
+.is-revealed .word {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .word {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "available": true,
+  "camera_id": "camera_01",
+  "live": false,
+  "schema_version": 4,
+  "store": {
+    "bytes": 278528,
+    "events": 17,
+    "observations": 1150,
+    "span_s": 944482
+  },
+  "uptime_s": 0.0
+}

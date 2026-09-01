@@ -1,0 +1,13 @@
+{
+  "available": true,
+  "camera_id": "facility",
+  "live": true,
+  "schema_version": 4,
+  "store": {
+    "bytes": 4353552,
+    "events": 20,
+    "observations": 758,
+    "span_s": 59
+  },
+  "uptime_s": 60.2
+}

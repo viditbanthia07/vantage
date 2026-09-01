@@ -1,0 +1,39 @@
+{
+  "available": true,
+  "camera_count": 3,
+  "cameras": {
+    "north": {
+      "active_edges": [],
+      "camera_id": "north",
+      "collective_behaviors": [],
+      "entity_count": 0,
+      "timestamp": 1788230312.58,
+      "unattended_objects": []
+    },
+    "west": {
+      "active_edges": [
+        {
+          "confidence": 0.85,
+          "distance": 0.001,
+          "evidence": "spatial separation 0.001 <= adaptive threshold 0.139",
+          "relation": "near",
+          "source": "car_28",
+          "target": "truck_35"
+        }
+      ],
+      "camera_id": "west",
+      "collective_behaviors": [],
+      "entity_count": 4,
+      "timestamp": 1788230312.54,
+      "unattended_objects": []
+    },
+    "yard": {
+      "active_edges": [],
+      "camera_id": "yard",
+      "collective_behaviors": [],
+      "entity_count": 1,
+      "timestamp": 1788230312.61,
+      "unattended_objects": []
+    }
+  }
+}
