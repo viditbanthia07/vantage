@@ -23,8 +23,21 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
 
+    // `@console/*` is how beat 4 imports the console's real TrendChart rather
+    // than a copy of it. The React entries below are what make that work off
+    // this machine: TypeScript resolves a bare `react` by walking up from the
+    // *importing file*, so a module under ../frontend/src looks in
+    // frontend/node_modules and then the repository root, neither of which
+    // exists in a fresh checkout - and the site's own node_modules, one
+    // directory away, is never consulted. Vite has no such trouble; `vite build`
+    // succeeds in a clean worktree where `tsc -b` fails, which is a good way to
+    // ship a build that only compiles on the machine it was written on.
     "paths": {
-      "@console/*": ["../frontend/src/*"]
+      "@console/*": ["../frontend/src/*"],
+      "react": ["./node_modules/@types/react"],
+      "react/*": ["./node_modules/@types/react/*"],
+      "react-dom": ["./node_modules/@types/react-dom"],
+      "react-dom/*": ["./node_modules/@types/react-dom/*"]
     }
   },
   // `src` alone. Listing `../frontend/src` here typechecked the entire console
