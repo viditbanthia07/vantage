@@ -211,7 +211,7 @@ const Scrub: React.FC = () => {
         <button
           type="button"
           onClick={toggle}
-          className="rounded-sm border border-brass/30 px-3 py-1 font-mono text-micro uppercase tracking-[0.12em] text-warm-white/80 transition-colors hover:border-brass hover:text-warm-white"
+          className="tap rounded-sm border border-brass/30 px-4 font-mono text-micro uppercase tracking-[0.12em] text-warm-white/80 transition-colors hover:border-brass hover:text-warm-white"
         >
           {playing ? 'pause' : 'play'}
         </button>
@@ -226,7 +226,7 @@ const Scrub: React.FC = () => {
             value={split}
             onChange={(event) => setSplit(Number(event.target.value))}
             aria-label="Move the boundary between the analysed frames and the raw frames"
-            className="h-1 flex-1 cursor-ew-resize appearance-none rounded bg-brass/25 accent-string-red"
+            className="range flex-1"
           />
         </label>
       </div>

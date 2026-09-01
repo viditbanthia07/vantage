@@ -261,6 +261,29 @@ try {
   } else {
     note('no horizontal overflow at 390px');
   }
+
+  // ── 8. tap targets ────────────────────────────────────────────────────────
+  //
+  // The research note lists broken tap targets among the failures that cap a
+  // score outright, and it was right to: measured once, every interactive
+  // element here was under 44px, and the scrub slider was 4px tall. 44 is the
+  // WCAG 2.2 target-size floor and the number both platform guidelines use.
+  const targets = await phone.evaluate(() => {
+    const nodes = [...document.querySelectorAll('a, button, input, [tabindex]:not([tabindex="-1"])')];
+    return nodes
+      .map((node) => ({ node, box: node.getBoundingClientRect() }))
+      .filter(({ box }) => box.width > 0 && box.height > 0 && (box.width < 44 || box.height < 44))
+      .map(({ node, box }) => {
+        const name = (node.getAttribute('aria-label') || node.textContent || '').trim().slice(0, 30);
+        return `${node.tagName.toLowerCase()} "${name}" is ${Math.round(box.width)}x${Math.round(box.height)}`;
+      });
+  });
+  if (targets.length > 0) {
+    problems.push(`${targets.length} tap target(s) under 44px at 390px: ${targets.join('; ')}`);
+  } else {
+    note('every tap target clears 44px at 390px');
+  }
+
   if (SHOTS) await phone.screenshot({ path: `${SHOTS}/phone.png`, fullPage: false });
 } finally {
   await browser.close();

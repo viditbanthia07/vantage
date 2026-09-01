@@ -17,6 +17,7 @@ npm run build      # static files in dist/
 npm run preview    # serve dist/
 npm run typecheck
 npm run smoke      # a real browser, against a running preview
+npm run perf       # LCP, sustained frame rate, tap targets — measured, not asserted
 ```
 
 ---
@@ -98,17 +99,30 @@ showing a drawing of the product.
 
 ## Budgets, and where they are actually measured
 
-| | Target | Now |
+| | Target | Measured |
 | :--- | :--- | :--- |
 | JS before the hero paints | < 150 KB gzipped | **68 KB** — three.js and GSAP both load after |
+| Largest Contentful Paint, slow 4G | < 1.8 s | **0.90 s** (the `h1`) |
+| Frame rate through the hero, scrolling | 60 fps sustained | **120 fps median, 118 fps p95**; 1 frame over 16.9 ms in 321 |
 | Draw calls in the hero | < 100 | **16** |
+| Transferred on first load | — | **410 KB** across 13 resources |
 | Media total | < 3 MB | **1.9 MB**, of which ~1.2 MB is fetched |
-| External requests | zero | **zero**, enforced by `npm run smoke` |
+| Tap targets at 390px | ≥ 44 px | **all 7**, after a fix — every one was under before it was measured |
+| External requests | zero | **zero** |
 
-`npm run smoke` is not a formality. It fails the build on any external request,
-a missing beat or heading, more than one `h1`, a hero that issues no draw calls,
-a still that never loads, a skip link that does not behave, any reveal still
-waiting under `prefers-reduced-motion`, and horizontal overflow at 390px.
+The last two rows are the reason both scripts exist. `npm run perf` measures LCP
+on a throttled connection, samples every frame while scrolling the hero, checks
+that the render loop actually stops when the hero leaves the viewport, and sizes
+every tap target on a phone. `npm run smoke` then holds the line: it fails on any
+external request, a missing beat or heading, more than one `h1`, a hero issuing
+no draw calls, a still that never loads, a skip link that misbehaves, any reveal
+still waiting under `prefers-reduced-motion`, horizontal overflow at 390px, and
+any tap target under 44px.
+
+Tap targets are worth the specific note. Every interactive element on this page
+was under 44px until it was measured, and the scrub slider was **4px tall** — a
+control nobody can operate with a thumb, on a page that had already passed a
+mobile-overflow check. Reading the code would not have found it.
 
 ---
 

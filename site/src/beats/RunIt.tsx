@@ -55,14 +55,14 @@ const CommandLine: React.FC<{ label: string; command: string; note: string }> = 
 
   return (
     <div className="border border-brass/20 bg-board-surface/60">
-      <div className="flex items-center justify-between gap-4 border-b border-brass/15 px-5 py-3">
+      <div className="flex items-center justify-between gap-4 border-b border-brass/15 px-5 py-2">
         <span className="font-mono text-micro uppercase tracking-[0.14em] text-brass">
           {label}
         </span>
         <button
           type="button"
           onClick={copy}
-          className="rounded-sm border border-brass/30 px-3 py-1 font-mono text-micro uppercase tracking-[0.12em] text-warm-white/80 transition-colors hover:border-brass hover:text-warm-white"
+          className="tap shrink-0 rounded-sm border border-brass/30 px-4 font-mono text-micro uppercase tracking-[0.12em] text-warm-white/80 transition-colors hover:border-brass hover:text-warm-white"
         >
           {state === 'copied' ? 'copied' : state === 'unavailable' ? 'select it instead' : 'copy'}
           {/* The result is announced, not only coloured. */}
@@ -108,13 +108,13 @@ export const RunIt: React.FC = () => (
       <div className="mt-14 flex flex-wrap items-center gap-x-8 gap-y-4">
         <a
           href={REPO}
-          className="border-b border-string-red pb-1 font-mono text-lede uppercase tracking-[0.1em] text-warm-white transition-colors hover:text-string-red-light"
+          className="tap border-b border-string-red font-mono text-lede uppercase tracking-[0.1em] text-warm-white transition-colors hover:text-string-red-light"
         >
           The repository →
         </a>
         <a
           href={`${REPO}#readme`}
-          className="border-b border-brass/40 pb-1 font-mono text-lede uppercase tracking-[0.1em] text-warm-white/70 transition-colors hover:text-warm-white"
+          className="tap border-b border-brass/40 font-mono text-lede uppercase tracking-[0.1em] text-warm-white/70 transition-colors hover:text-warm-white"
         >
           The README →
         </a>

@@ -130,7 +130,7 @@
   }
 
   .skip-link {
-    @apply absolute left-4 top-4 z-50 -translate-y-24 rounded bg-manila px-4 py-2 font-mono text-tiny text-ink transition-transform;
+    @apply absolute left-4 top-4 z-50 flex min-h-11 -translate-y-24 items-center rounded bg-manila px-5 font-mono text-tiny text-ink transition-transform;
   }
   .skip-link:focus {
     @apply translate-y-0;
@@ -160,6 +160,64 @@
     opacity: 1 !important;
     transform: none !important;
   }
+}
+
+/*
+ * Touch targets, and the one control that needed real work.
+ *
+ * The research note lists broken tap targets as capping a score outright, and
+ * measurement found every interactive element on this page under 44px on a
+ * phone - the scrub slider worst of all at 4px tall, which is a control nobody
+ * can use with a thumb. `.tap` is the floor for buttons and links.
+ *
+ * The range input cannot simply be made 44px tall: that would draw a 44px bar.
+ * So the element is 44px and transparent, its *track* is painted by a
+ * pseudo-element at 4px, and the thumb is centred in the taller box. The
+ * visible control is unchanged; the thing a thumb has to hit is eleven times
+ * bigger.
+ */
+.tap {
+  min-height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 2.75rem;
+  background: transparent;
+  cursor: ew-resize;
+}
+
+.range::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(176, 141, 87, 0.25);
+}
+.range::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(176, 141, 87, 0.25);
+}
+
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #b33a2e;
+  border: 2px solid #14110d;
+  /* Centres an 18px thumb on a 4px track. */
+  margin-top: -7px;
+}
+.range::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #b33a2e;
+  border: 2px solid #14110d;
 }
 
 /*
