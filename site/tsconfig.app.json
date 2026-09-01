@@ -27,5 +27,12 @@
       "@console/*": ["../frontend/src/*"]
     }
   },
-  "include": ["src", "../frontend/src"]
+  // `src` alone. Listing `../frontend/src` here typechecked the entire console
+  // against the *site's* node_modules, which works only on a machine where the
+  // console's dependencies also happen to be installed - a fresh checkout of
+  // this repository failed with two hundred "Cannot find module 'react'"
+  // errors from files this page never imports. The two console modules beat 4
+  // does import are pulled in transitively through the `@console/*` path, which
+  // is what should decide it.
+  "include": ["src"]
 }
